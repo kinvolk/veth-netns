@@ -88,7 +88,7 @@ func getLinkNetNSID(vethName string) (int, error) {
 
 	output, err := exec.Command(prog, args...).CombinedOutput()
 	if err != nil {
-		return -1, fmt.Errorf("failed to get link-netnsid from veth %v: %v\n%v", vethName, err, output)
+		return -1, fmt.Errorf("failed to get link-netnsid from veth %v: %v\n%v", vethName, err, string(output))
 	}
 
 	m := []ifInfo{}
