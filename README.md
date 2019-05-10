@@ -20,10 +20,9 @@ $ sudo rkt run --interactive kinvolk.io/aci/busybox
 net:[4026532431]
 
 Now, on the host, we check the name of the network interface that's paired with
-the container's.
+the container's:
 
-...
-
+```
 $ ip link | grep 23
 23: vethb7b583ef@if3: <BROADCAST,MULTICAST,DYNAMIC,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP mode DEFAULT group default
 ```
