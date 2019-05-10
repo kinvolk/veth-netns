@@ -18,6 +18,7 @@ $ sudo rkt run --interactive kinvolk.io/aci/busybox
     link/ether fe:5d:98:92:a1:9e brd ff:ff:ff:ff:ff:ff
 / # readlink /proc/self/ns/net
 net:[4026532431]
+```
 
 Now, on the host, we check the name of the network interface that's paired with
 the container's:
