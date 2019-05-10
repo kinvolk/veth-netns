@@ -74,7 +74,7 @@ func getAllNetNS() (map[int]string, error) {
 type ifInfo struct {
 	Ifindex     int    `json:"ifindex"`
 	IFName      string `json:"ifname"`
-	LinkNetnsId int    `json:"link_netnsid"`
+	LinkNetnsId *int   `json:"link_netnsid"`
 }
 
 // getLinkNetNSID gets the link-netnsid of vethName by calling the ip command
@@ -96,7 +96,11 @@ func getLinkNetNSID(vethName string) (int, error) {
 	if err != nil {
 		return -1, fmt.Errorf("cannot parse json output: %v\n%s", err, output)
 	}
-	return m[0].LinkNetnsId, nil
+	if m[0].LinkNetnsId == nil {
+		return -1, fmt.Errorf("iface %v doesn't have link-netnsid, is it in a different network namespace?", vethName)
+	}
+
+	return *m[0].LinkNetnsId, nil
 }
 
 // getLocalNetNSID gets the local network namespace ID of netNSPath through
